@@ -1,4 +1,4 @@
-const DATA_DIRECTORY = import.meta.dir + '/data';
+import { cleanUp, DATA_DIRECTORY } from "./utilties";
 
 Bun.serve({
   async fetch(request) {
@@ -22,6 +22,7 @@ Bun.serve({
 
     if (asset.status === 200) {
       console.log("Got asset. Writing to disk...");
+      cleanUp()
       await Bun.write(DATA_DIRECTORY + url.pathname, asset);
     }
 
